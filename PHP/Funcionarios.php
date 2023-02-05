@@ -1,8 +1,9 @@
 <?php
 
     require_once('Endereco.php');
+    require_once('Pessoas.php');
 
-    Class Funcionario extends Pessoas{
+    class Funcionario extends Pessoas{
         protected string $matricula;
         protected float $salario;
         protected string $cargo;
@@ -23,7 +24,7 @@
         public function __set(string $nomeVariavel, string $valor) : void
         {
             $this->nomeVariavem = $valor;
-        }
+        }//fim do set
 
         public function __toString() : string
         {

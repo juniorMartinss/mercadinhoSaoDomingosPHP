@@ -1,7 +1,7 @@
 <?php
 
 class Estoque{
-    protected $produtos;
+    private $produtos;
 
     public function __construct()
     {

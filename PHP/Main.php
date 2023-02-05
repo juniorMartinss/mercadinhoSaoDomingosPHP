@@ -2,8 +2,16 @@
     require_once('Estoque.php');
     require_once('Produtos.php');
     require_once('Endereco.php');
+    require_once('Modelo/DAO/Conexao.php');
+    require_once('LoginUsuario.php');
 
-  // Instanciando um objeto da classe Estoque
+    use PHP\Modelo\DAO\Conexao;
+    use PHP\Modelo\DAO\LoginUsu;
+
+
+
+  /*
+    // Instanciando um objeto da classe Estoque
   $estoque = new Estoque();
  
   $endereco = new Endereco("Rua Paraíba", "108", "fundos", "Vila conceição","São José Dos Campos","SP","Brasil","099450123");
@@ -21,6 +29,24 @@
   // Exibindo a lista de produtos
   $estoque->listarProdutos();
   
-  echo $endereco->logradouro." - N°: ".$endereco->numero." - Complemento: ".$endereco->complemento."<br>Bairro: ".$endereco->bairro." - Cidade: ".$endereco->cidade." - UF: ".$endereco->uf."<br>País: ".$endereco->pais." - CEP: ".$endereco->cep;
+  echo $endereco->logradouro." - N°: ".$endereco->numero." - Complemento: ".$endereco->complemento."<br>Bairro: ".$endereco->bairro." - Cidade: ".$endereco->cidade." - UF: ".$endereco->uf."<br>País: ".$endereco->pais." - CEP: ".$endereco->cep;*/
+
+  echo "------ Teste Banco De Dados ------<br><br>";
+  $conexao = new Conexao();
+  $conexao->conectar();//abrindo a conexão com banco de dados
+
+  echo "<br><br>------ Teste do LOGIN e SENHA ------<br><br>";
+
+  //Incluindo o usuario e senha
+  $login = new LoginUsu("jr1986", "sen@c");
+  if ($login->autenticar()) {
+      echo "Autenticado com sucesso";
+      return;
+  }
+  echo "Usuário ou senha inválidos";
+  //Fim do incluindo o usuario e senha
+
+ 
+
 ?>
  
