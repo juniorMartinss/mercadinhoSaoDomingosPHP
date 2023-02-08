@@ -1,12 +1,21 @@
 <?php
-    require_once('Estoque.php');
-    require_once('Produtos.php');
-    require_once('Endereco.php');
-    require_once('Modelo/DAO/Conexao.php');
-    require_once('LoginUsuario.php');
+    namespace PHP;
+
+    require_once("Estoque.php");
+    require_once("Endereco.php");
+    require_once("Modelo/DAO/Conexao.php");
+    require_once("LoginUsuario.php");
+    require_once("Produtos.php");
+    require_once("Funcionarios.php");
+    require_once("Modelo/DAO/ConsultarIndividual.php");
+  
 
     use PHP\Modelo\DAO\Conexao;
-    use PHP\Modelo\DAO\LoginUsu;
+    use PHP\LoginUsu;
+    use PHP\Estoque;
+    use PHP\Funcionario;  
+    use PHP\Endereco;
+    use PHP\Modelo\DAO\Consultar;
 
 
 
@@ -18,7 +27,7 @@
   $funcionario = new Funcionario("35169745633", "Joel Santana", "11 9 45326978", $endereco, "2119", 3500.00, "Estoquista");
   
   // Adicionando produtos ao estoque
-  $produto1 = new Produtos("Arroz", 10, 20.90);
+  
   $produto2 = new Produtos("Pasta de dente", 5, 15.99);
   $produto3 = new Produtos("Sabonete Lux", 2, 4.99);
   
@@ -39,14 +48,30 @@
 
   //Incluindo o usuario e senha
   $login = new LoginUsu("jr1986", "sen@c");
-  if ($login->autenticar()) {
+  if ($login->autenticar($conexao)) {
       echo "Autenticado com sucesso";
-      return;
-  }
-  echo "Usuário ou senha inválidos";
+      
+  }else{
+     echo "Usuário ou senha inválidos";
   //Fim do incluindo o usuario e senha
+  }
 
- 
+  $produto1 = new Produtos("Heróis da Fé", 10, 52.00);
+
+  echo "<br><br>------ Teste inclusão de novos produtos ------<br><br>";
+  $estoq = new Estoque();
+  echo $estoq->inserirProduto($conexao,$produto1);
+
+  echo "<br><br>------ Teste adicionar funcionários ------<br><br>";
+
+  $endereco = new Endereco(1,"Rua Aprendiz", "185", "Fundos", "Vila Senac", "Aprendizado", "SP", "Brasil", "096543-23");
+  echo $endereco->inserirEndereco($conexao, $endereco);
+
+  $funcionario = new Funcionario("2000","Atendente", $endereco->codigo);
+  echo $funcionario->inserirFuncionarios($conexao, $funcionario);
+
+  $print ->consultarIndividual($connect, 'Heróis da Fé');
+  
 
 ?>
- 
+  

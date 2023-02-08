@@ -1,21 +1,40 @@
 <?php
 
+    namespace PHP;
+    
     require_once('Endereco.php');
     require_once('Pessoas.php');
+    require_once('Modelo/DAO/Conexao.php');
 
-    class Funcionario extends Pessoas{
-        protected string $matricula;
-        protected float $salario;
-        protected string $cargo;
+    use PHP\Endereco;
+    use PHP\Pessoas;
+    use PHP\Modelo\DAO\Conexao;
 
-        public function __construct(string $cpf, string $nome, string $telefone, Endereco $endereco, string $matricula, float $salario, string $cargo)
+    class Funcionario {
+        public float $salario;
+        public string $cargo;
+        public int $codigo;
+
+        public function __construct(float $salario, string $cargo, int $codigo)
         {
-            parent::__construct($cpf, $nome, $telefone, $endereco);
-            $this->matricula = $matricula;
-            $this->salario = $salario;
-            $this->cargo = $cargo;
-
+           $this->salario = $salario;
+           $this->cargo   = $cargo;
+           $this->codigo  = $codigo;
         }//fim do construtor
+
+        public function inserirFuncionarios(Conexao $conexao, Funcionario $funcionario){
+            $conn = $conexao->conectar();
+            $sql = "INSERT INTO funcionario(matricula, salario, cargo, endereco) VALUES ('', '$funcionario->salario', '$funcionario->cargo', '$funcionario->codigo')";
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
+                echo "Funcionario adicionado com sucesso!";
+            } else {
+                echo "Erro ao adicionar funcionario: " . mysqli_error($conn);
+            }
+
+            mysqli_close($conn);
+        }
 
         public function __get(string $nomeVariavel){
             return $this->nomeVariavel;

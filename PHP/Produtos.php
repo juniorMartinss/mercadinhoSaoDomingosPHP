@@ -1,15 +1,19 @@
 <?php
 
+    namespace PHP;
+
     class produtos{
+        
         protected $nomeProduto;
         protected $quantidade;
-        protected $valorUnitario;
+        protected $valor;
 
-        public function __construct(string $nomeProduto, int $quantidade, float $valorUnitario )
+        public function __construct(string $nomeProduto, int $quantidade, float $valor )
         {
+            
             $this->nomeProduto = $nomeProduto;
             $this->quantidade = $quantidade;
-            $this->valorUnitario = $valorUnitario;
+            $this->valor = $valor;
         }//fim do construtor
 
         public function __get(string $nomeProduto)

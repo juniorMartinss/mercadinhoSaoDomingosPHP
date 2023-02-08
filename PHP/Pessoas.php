@@ -1,4 +1,6 @@
 <?php
+    namespace PHP;
+
     require_once('Endereco.php');
 
     class Pessoas{
